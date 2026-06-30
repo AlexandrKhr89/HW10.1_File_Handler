@@ -8,14 +8,17 @@ public class Main {
         FileHandler handler = new FileHandler();
         String fileName = "myfile";
         String fileContent = "My very important information.";
-        String result = handler.writeFile(BASE_PATH, fileName, fileContent);
-        String content = handler.readFile(BASE_PATH + fileName + ".txt");
-        getOutput("RESULT: " + result);
-        getOutput("FILE CONTENT: " + content);
+        getOutput("RESULT: ");
+        try {
+            handler.writeFile(BASE_PATH + fileName + ".txt", fileContent);
+            getOutput("FILE CONTENT: ");
+            handler.readFile(BASE_PATH + fileName + ".txt");
+        } catch (IllegalArgumentException | FileProcessingException e ) {
+            getOutput("IllegalArgumentException: " + e.getMessage() + "\n");
+        }
     }
 
     private static void getOutput(String output) {
-        System.out.println(output);
+        System.out.print(output);
     }
 }
-
